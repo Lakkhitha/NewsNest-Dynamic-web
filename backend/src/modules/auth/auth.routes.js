@@ -19,6 +19,12 @@ const loginSchema = z.object({
   password: z.string().min(6),
 });
 
+/**
+ * Register new user account with email/password.
+ * Returns JWT token and user profile.
+ * @route POST /api/auth/register
+ * @body {name, email, password}
+ */
 router.post("/register", async (req, res) => {
   const parsed = registerSchema.safeParse(req.body);
   if (!parsed.success) {

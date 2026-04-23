@@ -148,6 +148,13 @@ router.get("/seed/status", async (_req, res) => {
   });
 });
 
+/**
+ * Create new news post with optional source/image.
+ * Auto-generates quality score from content length.
+ * @route POST /api/posts
+ * @body {title, body, category, source_url?, image_url?}
+ * @auth required
+ */
 router.post("/", requireAuth, async (req, res) => {
   const parsed = postSchema.safeParse(req.body);
   if (!parsed.success) {
