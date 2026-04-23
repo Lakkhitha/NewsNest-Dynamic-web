@@ -5,7 +5,7 @@
 - [x] Confirm Git status (fresh repo on main, no commits, remote set)
 - [x] Get plan approval
 
-**Commits so far: 9 (10 with this TODO update)**
+**Commits so far: 11**
 
 ## Pending Steps (to be checked off progressively)
 
