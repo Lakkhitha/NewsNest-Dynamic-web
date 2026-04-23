@@ -31,14 +31,20 @@ This guide is written for running the project on a new PC after copying the sour
 - backend: Express API, database schema/migration/seed scripts
 - logo.png: Branding logo used by frontend
 
-## 1. Prerequisites (on the new PC)
+## 1. Prerequisites
 
-Install these first:
-
-- Node.js 20+ (LTS recommended)
+**Option A: Native (README original)**
+- Node.js 20+
 - npm 10+
-- PostgreSQL 14+ (or compatible)
-- Git (optional, if cloning via git)
+- PostgreSQL 14+
+
+**Option B: Docker (Recommended - 1 command)**
+- Docker 20+
+
+Quick checks:
+```bash
+node -v && npm -v && docker --version
+```
 
 Quick check commands:
 
@@ -137,32 +143,32 @@ What these do:
 - db:migrate: creates/updates schema
 - db:seed: inserts demo/sample data
 
-## 7. Run the Application
+## Docker Run (Recommended - Single Command)
 
-### Start backend
-
-```powershell
-cd backend
-npm run dev
+1. Copy `.env.example` to `.env` and customize JWT_SECRET:
+```
+JWT_SECRET=your_64char_secret_here_make_it_random_secure
 ```
 
-Backend will run at:
-
-- http://localhost:4000
-- API base: http://localhost:4000/api
-
-### Start frontend
-
-```powershell
-cd frontend
-npm run dev
+2. Run full stack (Postgres + Backend auto-migrate/seed):
+```
+docker compose up -d
 ```
 
-Frontend will run at (default):
+3. Frontend (separate terminal):
+```
+cd frontend && npm i && VITE_API_URL=http://localhost:4000/api npm run dev
+```
 
-- http://localhost:5173
+**Status:** Backend http://localhost:4000/api/health | Frontend http://localhost:5173
 
-Open this URL in browser.
+Stop: `docker compose down`
+
+Prod: `docker compose -f docker-compose.prod.yml up -d`
+
+## Native Run (Original)
+
+Follow steps 4-7 as before (env, npm i, migrate/seed, dev servers).
 
 ## 8. Demo Accounts
 
