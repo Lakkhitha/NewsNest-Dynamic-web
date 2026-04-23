@@ -5,7 +5,7 @@
 - [x] Confirm Git status (fresh repo on main, no commits, remote set)
 - [x] Get plan approval
 
-**Commits so far: 9**
+**Commits so far: 9 (10 with this TODO update)**
 
 ## Pending Steps (to be checked off progressively)
 
@@ -37,9 +37,9 @@ Group by area, each with descriptive msg. Use edit_file/create_file for changes,
 18. [ ] Admin: Bulk action confirmations
 
 **Project-Wide (5 commits):**
-19. [ ] README: Add API docs section
+19. [x] README: Add API docs section
 20. [x] .gitignore: Add more patterns
-21. [ ] package.json: Add lint/test scripts
+21. [x] package.json: Add lint/test scripts
 22. [x] Scripts: Add admin_smoke.mjs runner
 23. [ ] Final polish: Format all code
 
