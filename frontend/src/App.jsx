@@ -213,14 +213,14 @@ export default function App() {
       <footer className="app-footer">
         <Link className="app-footer-brand-link" to={token ? "/feed" : "/login"}>
           <div className="app-footer-brand">
-            <img src="/logo.png" alt="NewsNest logo" className="app-footer-logo" />
+            <img src="/logo.png" alt="NewsNest - Trusted social news network logo" className="app-footer-logo" />
             <div>
               <strong>NewsNest</strong>
               <p>Trusted social news network</p>
             </div>
           </div>
         </Link>
-        <small>© {new Date().getFullYear()} NewsNest</small>
+        <small>© {new Date().getFullYear()} NewsNest. All rights reserved.</small>
       </footer>
     </div>
   );

@@ -126,7 +126,7 @@ function PostCard({ item, onReact, onComment, onShare, onReport, onReadLater, is
         <Link className="post-link" to={`/posts/${item.id}`}>{item.title}</Link>
       </h3>
       <p>{item.body}</p>
-      {item.image_url && <img src={item.image_url} alt={item.title} loading="lazy" />}
+{item.image_url && <img src={item.image_url} alt={`${item.title} - ${item.category} news image`} loading="lazy" />}
       <div className="chip-row">
         <span className="chip">{item.category}</span>
         <span className="chip">score {item.quality_score}</span>

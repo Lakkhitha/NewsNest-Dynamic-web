@@ -5,6 +5,8 @@
 - [x] Confirm Git status (fresh repo on main, no commits, remote set)
 - [x] Get plan approval
 
+**Commits so far: 2**
+
 ## Pending Steps (to be checked off progressively)
 
 ### Phase 1: Git Init (1 commit)
@@ -15,8 +17,8 @@
 Group by area, each with descriptive msg. Use edit_file/create_file for changes, commit after each logical group.
 
 **Frontend Fixes/Feats (8 commits):**
-3. [ ] Add .env.example to frontend + README update
-4. [ ] Accessibility: Add alt texts to images (hero.png, logo)
+3. [x] Add .env.example to frontend + README update
+4. [x] Accessibility: Add alt texts to images (hero.png, logo)
 5. [ ] Perf: Memoize API fetches in FeedPage.jsx
 6. [ ] UX: Add loading skeletons to pages
 7. [ ] Lint: Fix minor ESLint warnings
@@ -25,7 +27,7 @@ Group by area, each with descriptive msg. Use edit_file/create_file for changes,
 10. [ ] Mobile: Minor responsive tweaks
 
 **Backend Fixes/Feats (8 commits):**
-11. [ ] Add .env.example to backend
+11. [x] Add .env.example to backend
 12. [ ] Security: Strengthen rate limits
 13. [ ] Logging: Structured logs in routes
 14. [ ] Validation: More Zod schemas
