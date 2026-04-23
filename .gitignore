@@ -1,0 +1,15 @@
+node_modules/
+**/node_modules/
+.vite/
+**/.vite/
+dist/
+build/
+coverage/
+*.log
+
+.env
+backend/.env
+frontend/.env
+
+.DS_Store
+Thumbs.db
