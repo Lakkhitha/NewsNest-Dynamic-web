@@ -41,7 +41,7 @@ Group by area, each with descriptive msg. Use edit_file/create_file for changes,
 20. [x] .gitignore: Add more patterns
 21. [x] package.json: Add lint/test scripts
 22. [x] Scripts: Add admin_smoke.mjs runner
-23. [ ] Final polish: Format all code
+23. [x] Final polish: Format all code
 
 ### Phase 3: Push
 24. [ ] `git push origin main`
