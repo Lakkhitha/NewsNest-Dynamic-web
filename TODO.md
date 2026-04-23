@@ -19,7 +19,7 @@ Group by area, each with descriptive msg. Use edit_file/create_file for changes,
 **Frontend Fixes/Feats (8 commits):**
 3. [x] Add .env.example to frontend + README update
 4. [x] Accessibility: Add alt texts to images (hero.png, logo)
-5. [ ] Perf: Memoize API fetches in FeedPage.jsx
+5. [x] Perf: Memoize API fetches in FeedPage.jsx
 6. [ ] UX: Add loading skeletons to pages
 7. [ ] Lint: Fix minor ESLint warnings
 8. [ ] Docs: JSDoc to key components (Navbar, api.js)

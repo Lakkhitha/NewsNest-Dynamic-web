@@ -13,7 +13,7 @@ export const authLimiter = rateLimit({
 
 export const writeLimiter = rateLimit({
   windowMs: 60 * 1000,
-  max: 80,
+  max: 60,
   standardHeaders: true,
   legacyHeaders: false,
   skip: (req) => ["GET", "HEAD", "OPTIONS"].includes(req.method),
