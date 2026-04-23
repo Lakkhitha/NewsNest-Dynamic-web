@@ -34,7 +34,7 @@ Group by area, each with descriptive msg. Use edit_file/create_file for changes,
 15. [x] Docs: JSDoc to route handlers
 16. [x] Health: Enhanced /api/health
 17. [x] Seed: More diverse sample data
-18. [ ] Admin: Bulk action confirmations
+18. [x] Admin: Bulk action confirmations
 
 **Project-Wide (5 commits):**
 19. [x] README: Add API docs section

@@ -64,13 +64,14 @@ export default function AdminPage() {
     load(postStatusFilter);
   };
 
-  const resolveBulkReports = async () => {
-    if (selectedReports.length === 0) return;
-    await api.patch("/admin/reports/bulk-resolve", { reportIds: selectedReports });
-    setNotice(`Resolved ${selectedReports.length} reports`);
-    setSelectedReports([]);
-    load(postStatusFilter);
-  };
+const resolveBulkReports = async () => {
+  if (selectedReports.length === 0) return;
+  if (!window.confirm(`Confirm resolve ${selectedReports.length} reports?`)) return;
+  await api.patch("/admin/reports/bulk-resolve", { reportIds: selectedReports });
+  setNotice(`Resolved ${selectedReports.length} reports`);
+  setSelectedReports([]);
+  load(postStatusFilter);
+};
 
   const updateRole = async (userId, role) => {
     await api.patch(`/admin/users/${userId}/role`, { role });
@@ -104,6 +105,7 @@ export default function AdminPage() {
 
   const deleteBulkComments = async () => {
     if (selectedComments.length === 0) return;
+    if (!window.confirm(`Confirm delete ${selectedComments.length} comments? This is permanent.`)) return;
     await api.patch("/admin/comments/bulk-remove", { commentIds: selectedComments });
     setNotice(`Removed ${selectedComments.length} comments`);
     setSelectedComments([]);
