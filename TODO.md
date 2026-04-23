@@ -5,7 +5,7 @@
 - [x] Confirm Git status (fresh repo on main, no commits, remote set)
 - [x] Get plan approval
 
-**Commits so far: 4**
+**Commits so far: 5**
 
 ## Pending Steps (to be checked off progressively)
 
@@ -32,7 +32,7 @@ Group by area, each with descriptive msg. Use edit_file/create_file for changes,
 13. [ ] Logging: Structured logs in routes
 14. [ ] Validation: More Zod schemas
 15. [ ] Docs: JSDoc to route handlers
-16. [ ] Health: Enhanced /api/health
+16. [x] Health: Enhanced /api/health
 17. [ ] Seed: More diverse sample data
 18. [ ] Admin: Bulk action confirmations
 
