@@ -231,19 +231,40 @@ npm run db:seed
 - Delete node_modules in frontend and backend
 - Re-run npm install in both folders
 
-## 12. API Areas (High-Level)
+## 13. API Documentation
 
-- /api/auth
-- /api/feed
-- /api/posts
-- /api/social
-- /api/messages
-- /api/users
-- /api/admin
-- /api/analytics
-- /api/support
+### Authentication
+- `POST /api/auth/register` - Create account
+- `POST /api/auth/login` - Login
+- `GET /api/auth/me` - Profile
 
-## Notes
+### Core Features
+- `GET /api/feed` - Personalized feed
+- `GET /api/posts` - Search/filter posts
+- `GET /api/posts/:id` - Post details
+- `POST /api/posts` - Create post
+- `GET /api/posts/trending` - Trending posts
 
-- This project uses logo.png as the site logo/favicon.
-- For deployment, use strong secrets and production-grade database credentials.
+### Social
+- `POST /api/social/follow/:userId` - Follow user
+- `POST /api/social/posts/:id/reactions` - React to post
+- `POST /api/social/posts/:id/comments` - Comment
+- `POST /api/social/reports` - Report content
+
+### Admin Only
+- `GET /api/admin/stats` - Platform stats
+- `GET /api/admin/reports` - Moderation queue
+- `PATCH /api/admin/reports/:id/resolve` - Resolve report
+- `GET /api/admin/export` - Data export (JSON/CSV)
+
+### Health & Status
+- `GET /api/health` - Service status + diagnostics
+
+**Rate Limits**: Auth (30/10min), Writes (60/min).
+
+## 14. Contributing & Scripts
+
+Run `npm run lint` in frontend/backend. No tests yet - PRs welcome!
+
+## License
+ISC
