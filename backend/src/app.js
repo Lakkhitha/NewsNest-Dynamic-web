@@ -19,8 +19,16 @@ app.use(cors());
 app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
 
+/**
+ * Health check endpoint - returns service status and basic diagnostics.
+ * @route GET /api/health
+ */
 app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok" });
+  res.json({ 
+    status: "ok",
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV || "development"
+  });
 });
 
 app.use("/api/auth", authLimiter, authRoutes);

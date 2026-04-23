@@ -5,7 +5,7 @@
 - [x] Confirm Git status (fresh repo on main, no commits, remote set)
 - [x] Get plan approval
 
-**Commits so far: 2**
+**Commits so far: 4**
 
 ## Pending Steps (to be checked off progressively)
 
@@ -22,13 +22,13 @@ Group by area, each with descriptive msg. Use edit_file/create_file for changes,
 5. [x] Perf: Memoize API fetches in FeedPage.jsx
 6. [ ] UX: Add loading skeletons to pages
 7. [ ] Lint: Fix minor ESLint warnings
-8. [ ] Docs: JSDoc to key components (Navbar, api.js)
+8. [x] Docs: JSDoc to key components (Navbar, api.js)
 9. [ ] Error: Global error boundary
 10. [ ] Mobile: Minor responsive tweaks
 
 **Backend Fixes/Feats (8 commits):**
 11. [x] Add .env.example to backend
-12. [ ] Security: Strengthen rate limits
+12. [x] Security: Strengthen rate limits
 13. [ ] Logging: Structured logs in routes
 14. [ ] Validation: More Zod schemas
 15. [ ] Docs: JSDoc to route handlers
