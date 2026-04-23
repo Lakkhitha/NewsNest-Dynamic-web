@@ -46,6 +46,9 @@ const headlinePartsB = [
   "youth innovation challenge",
   "early warning dashboard",
   "climate adaptation roadmap",
+  "AI governance guidelines",
+  "digital rights declaration",
+  "resilience investment plan"
 ];
 
 function randomFrom(list, seed) {
