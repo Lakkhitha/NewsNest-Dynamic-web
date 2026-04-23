@@ -13,3 +13,12 @@ frontend/.env
 
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+.nyc_output/
+tmp/
+temp/
+.DS_Store
+Thumbs.db

@@ -5,7 +5,7 @@
 - [x] Confirm Git status (fresh repo on main, no commits, remote set)
 - [x] Get plan approval
 
-**Commits so far: 7**
+**Commits so far: 9**
 
 ## Pending Steps (to be checked off progressively)
 
@@ -38,9 +38,9 @@ Group by area, each with descriptive msg. Use edit_file/create_file for changes,
 
 **Project-Wide (5 commits):**
 19. [ ] README: Add API docs section
-20. [ ] .gitignore: Add more patterns
+20. [x] .gitignore: Add more patterns
 21. [ ] package.json: Add lint/test scripts
-22. [ ] Scripts: Add admin_smoke.mjs runner
+22. [x] Scripts: Add admin_smoke.mjs runner
 23. [ ] Final polish: Format all code
 
 ### Phase 3: Push

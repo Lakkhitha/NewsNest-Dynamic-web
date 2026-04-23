@@ -1,3 +1,8 @@
+/**
+ * Admin smoke test script - verifies admin panel endpoints work with demo data.
+ * Run: cd backend && npm run db:seed && node scripts/admin_smoke.mjs
+ * Expected: All console.logs show expected status 200/2xx codes.
+ */
 const base = "http://localhost:4000/api";
 
 async function main() {
