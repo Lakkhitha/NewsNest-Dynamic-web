@@ -97,9 +97,7 @@ async function main() {
   const exportRes = await fetch(`${base}/admin/export?dataset=reports&format=csv&limit=20`, {
     headers: { Authorization: authHeaders.Authorization },
   });
-  const exportText = await exportRes.text();
-  console.log("export_status", exportRes.status);
-  console.log("export_has_rows", exportText.length > 0 ? "yes" : "no");
+  ");
 }
 
 main().catch((error) => {
