@@ -86,7 +86,14 @@ async function seedPosts() {
   console.log(`Seeded users and ${remaining} additional news posts.`);
 }
 
-
+async function run() {
+  try {
+    await ensureUsers();
+    await seedPosts();
+  } catch (error) {
+    console.error("Seed failed:", error.message);
+    process.exitCode = 1;
+  } finally {
     await db.destroy();
   }
 }
