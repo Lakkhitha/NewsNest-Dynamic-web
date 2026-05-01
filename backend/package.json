@@ -6,12 +6,7 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "start": "node src/server.js",
-    "check:env": "node scripts/validate-env.js",
-    "db:migrate": "node scripts/migrate.js",
-    "db:seed": "node scripts/seed.js",
-    "lint": "eslint src/**/*.js",
-    "lint:fix": "eslint src/**/*.js --fix",
-    "test": "echo \"No tests configured yet\""
+ 
   },
   "keywords": [],
   "author": "",
