@@ -4,11 +4,7 @@ services:
   postgres:
     image: postgres:16-alpine
     container_name: newsnest-postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: newsnest
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+    re
     ports:
       - "5432:5432"
     volumes:
