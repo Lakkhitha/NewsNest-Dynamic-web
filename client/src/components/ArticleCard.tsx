@@ -7,7 +7,9 @@ export function ArticleCard({ article, compact = false }: { article: Article; co
   return (
     <article className={`article-card ${compact ? "compact" : ""}`}>
       <Link className="article-media" to={`/article/${article.slug}`}>
-        <img src={article.imageUrl} alt={article.title} />
+        <img src={article.imageUrl} alt={article.title} onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }} />
+
+
         <div className="article-media-badges">
           <span className="article-category">{article.category.name}</span>
           {alertLabel ? <span className={`alert-pill ${article.alertLevel}`}>{alertLabel}</span> : null}

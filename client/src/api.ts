@@ -1,7 +1,17 @@
-import type { Article, ArticleDetailPayload, AuthResponse, DashboardPayload, HomePayload, User } from "./types";
+import type {
+  Article,
+  ArticleDetailPayload,
+  AuthResponse,
+  DashboardPayload,
+  HomePayload,
+  User,
+} from "./types";
 
-type RequestOptions = RequestInit & {
+type JsonBody = Record<string, unknown> | unknown[] | string | number | boolean | null;
+
+type RequestOptions = Omit<RequestInit, "body"> & {
   rawBody?: boolean;
+  body?: JsonBody | FormData | null;
 };
 
 function getToken() {
@@ -10,31 +20,55 @@ function getToken() {
 
 async function request<T>(path: string, options: RequestOptions = {}) {
   const headers = new Headers(options.headers || {});
-  if (!options.rawBody && options.body && !headers.has("Content-Type")) {
-    headers.set("Content-Type", "application/json");
-  }
+
   const token = getToken();
   if (token) {
     headers.set("Authorization", `Bearer ${token}`);
   }
-  const response = await fetch(path, { ...options, headers, body: options.rawBody ? options.body : options.body ? JSON.stringify(options.body) : undefined });
+
+  let body: BodyInit | undefined;
+  if (options.rawBody) {
+    body = options.body instanceof FormData ? options.body : undefined;
+  } else if (options.body !== undefined && options.body !== null) {
+    if (!headers.has("Content-Type")) {
+      headers.set("Content-Type", "application/json");
+    }
+    body = JSON.stringify(options.body);
+  }
+
+  const response = await fetch(path, {
+    ...options,
+    headers,
+    body,
+  });
+
+
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(payload.message || "Request failed");
+    throw new Error((payload as any)?.message || "Request failed");
   }
   return payload as T;
 }
 
 export function login(email: string, password: string) {
-  return request<AuthResponse>("/api/auth/login", { method: "POST", body: { email, password } });
+  return request<AuthResponse>("/api/auth/login", {
+    method: "POST",
+    body: { email, password },
+  });
 }
 
 export function register(name: string, email: string, password: string) {
-  return request<AuthResponse>("/api/auth/register", { method: "POST", body: { name, email, password } });
+  return request<AuthResponse>("/api/auth/register", {
+    method: "POST",
+    body: { name, email, password },
+  });
 }
 
 export function loginWithGoogle(credential: string) {
-  return request<AuthResponse>("/api/auth/google", { method: "POST", body: { credential } });
+  return request<AuthResponse>("/api/auth/google", {
+    method: "POST",
+    body: { credential },
+  });
 }
 
 export function me() {
@@ -42,11 +76,18 @@ export function me() {
 }
 
 export function getPreferences() {
-  return request<{ favoriteCategories: Array<{ id: number; name: string; slug: string; description?: string }> }>("/api/me/preferences");
+  return request<{
+    favoriteCategories: Array<{ id: number; name: string; slug: string; description?: string }>;
+  }>("/api/me/preferences");
 }
 
 export function updatePreferences(categorySlugs: string[]) {
-  return request<{ favoriteCategories: Array<{ id: number; name: string; slug: string; description?: string }> }>("/api/me/preferences", { method: "PUT", body: { categorySlugs } });
+  return request<{
+    favoriteCategories: Array<{ id: number; name: string; slug: string; description?: string }>;
+  }>("/api/me/preferences", {
+    method: "PUT",
+    body: { categorySlugs },
+  });
 }
 
 export function getHome() {
@@ -62,7 +103,10 @@ export function getArticles(params: { q?: string; category?: string } = {}) {
 }
 
 export function getCategory(slug: string) {
-  return request<{ category: { id: number; name: string; slug: string; description?: string }; articles: Article[] }>(`/api/categories/${slug}`);
+  return request<{
+    category: { id: number; name: string; slug: string; description?: string };
+    articles: Article[];
+  }>(`/api/categories/${slug}`);
 }
 
 export function getArticle(slug: string) {
@@ -70,19 +114,31 @@ export function getArticle(slug: string) {
 }
 
 export function getCategories() {
-  return request<{ categories: Array<{ id: number; name: string; slug: string; description?: string }> }>("/api/categories");
+  return request<{
+    categories: Array<{ id: number; name: string; slug: string; description?: string }>;
+  }>("/api/categories");
 }
 
 export function subscribeNewsletter(name: string, email: string) {
-  return request<{ message: string }>("/api/newsletter", { method: "POST", body: { name, email } });
+  return request<{ message: string }>("/api/newsletter", {
+    method: "POST",
+    body: { name, email },
+  });
 }
 
 export function sendContact(payload: { name: string; email: string; subject: string; message: string }) {
-  return request<{ message: string }>("/api/contact", { method: "POST", body: payload });
+  return request<{ message: string }>("/api/contact", {
+    method: "POST",
+    body: payload,
+  });
 }
 
 export function submitArticle(formData: FormData) {
-  return request<{ article: Article }>("/api/articles", { method: "POST", body: formData, rawBody: true });
+  return request<{ article: Article }>("/api/articles", {
+    method: "POST",
+    body: formData,
+    rawBody: true,
+  });
 }
 
 export function bookmarkArticle(id: number) {
@@ -90,7 +146,10 @@ export function bookmarkArticle(id: number) {
 }
 
 export function addComment(id: number, content: string) {
-  return request<{ ok: boolean }>(`/api/articles/${id}/comments`, { method: "POST", body: { content } });
+  return request<{ ok: boolean }>(`/api/articles/${id}/comments`, {
+    method: "POST",
+    body: { content },
+  });
 }
 
 export function fetchBookmarks() {
@@ -106,11 +165,17 @@ export function fetchMyArticles() {
 }
 
 export function updateArticleStatus(id: number, status: string) {
-  return request<{ ok: boolean }>(`/api/articles/${id}/status`, { method: "PATCH", body: { status } });
+  return request<{ ok: boolean }>(`/api/articles/${id}/status`, {
+    method: "PATCH",
+    body: { status },
+  });
 }
 
 export function toggleFeature(id: number, featured: boolean) {
-  return request<{ ok: boolean }>(`/api/articles/${id}/feature`, { method: "PATCH", body: { featured: featured ? 1 : 0 } });
+  return request<{ ok: boolean }>(`/api/articles/${id}/feature`, {
+    method: "PATCH",
+    body: { featured: featured ? 1 : 0 },
+  });
 }
 
 export function deleteArticle(id: number) {
@@ -118,11 +183,19 @@ export function deleteArticle(id: number) {
 }
 
 export function updateUserRole(id: number, role: string) {
-  return request<{ ok: boolean }>(`/api/admin/users/${id}/role`, { method: "PATCH", body: { role } });
+  return request<{ ok: boolean }>(`/api/admin/users/${id}/role`, {
+    method: "PATCH",
+    body: { role },
+  });
 }
 
 export function uploadAsset(file: File) {
   const formData = new FormData();
   formData.append("file", file);
-  return request<{ url: string }>("/api/upload", { method: "POST", body: formData, rawBody: true });
+  return request<{ url: string }>("/api/upload", {
+    method: "POST",
+    body: formData,
+    rawBody: true,
+  });
 }
+

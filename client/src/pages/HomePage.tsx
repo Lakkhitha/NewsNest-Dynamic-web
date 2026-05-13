@@ -54,12 +54,25 @@ export function HomePage() {
   async function refreshFeed() {
     setRefreshingFeed(true);
     try {
+      // backend currently returns a deterministic forYou list; reshuffle client-side
+      // so tapping refresh shows a different selection immediately.
       const refreshed = await getHome();
-      setHome(refreshed);
+
+      const forYou = [...(refreshed.forYou ?? [])];
+      for (let i = forYou.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [forYou[i], forYou[j]] = [forYou[j], forYou[i]];
+      }
+
+      setHome({
+        ...refreshed,
+        forYou,
+      });
     } finally {
       setRefreshingFeed(false);
     }
   }
+
 
   return (
     <div className="stack">
@@ -112,7 +125,9 @@ export function HomePage() {
         </div>
         {home.hero ? (
           <article className="hero-feature card-surface">
-            <img src={home.hero.imageUrl} alt={home.hero.title} />
+            <img src={home.hero.imageUrl} alt={home.hero.title} onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }} />
+
+
             <div className="hero-feature-body">
               <span className="eyebrow">{home.hero.category.name}</span>
               <h2>

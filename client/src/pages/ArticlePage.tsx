@@ -75,7 +75,9 @@ export function ArticlePage() {
         </div>
       </article>
 
-      <img className="article-cover" src={article.imageUrl} alt={article.title} />
+      <img className="article-cover" src={article.imageUrl} alt={article.title} onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = "hidden"; }} />
+
+
 
       <section className="article-grid">
         <div className="article-content card-surface">
