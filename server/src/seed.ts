@@ -149,6 +149,49 @@ const articles: SeedArticle[] = [
   },
 ];
 
+const generatedArticles: SeedArticle[] = Array.from({ length: 100 }, (_, index) => {
+  const id = index + 1;
+  const category = categories[index % categories.length][0];
+  const authorEmail = [
+    "admin@newsnest.local",
+    "mira.writer@newsnest.local",
+    "sam.writer@newsnest.local",
+    "newsnest.super@newsnest.local",
+  ][index % 4];
+  const tagPool = [
+    ["breaking", "featured"],
+    ["analysis", "opinion"],
+    ["startup", "innovation"],
+    ["community", "exclusive"],
+    ["ai", "economy"],
+    ["verified", "analysis"],
+    ["emergency", "traffic"],
+  ];
+  const tags = tagPool[index % tagPool.length];
+  const featured = index % 11 === 0 ? 1 : 0;
+  const breaking = index % 9 === 0 ? 1 : 0;
+  const status = index % 7 === 0 ? "published" : "published";
+  const alertLevel = breaking ? (index % 18 === 0 ? "emergency" : "traffic") : "";
+  return {
+    title: `NewsNest update ${id}: ${category} headline for the day`,
+    excerpt: `A fresh update from the ${category.toLowerCase()} desk with insights curated for modern readers.`,
+    content: `This is sample article ${id} providing a deeper look into ${category.toLowerCase()} developments, trends, and community impact. The NewsNest team brings timely coverage and practical context for newsroom users.`,
+    category,
+    tags,
+    authorEmail,
+    imageUrl: `https://images.unsplash.com/photo-15${String(100000000 + id).slice(-8)}?auto=format&fit=crop&w=1200&q=80`,
+    featured,
+    breaking,
+    status,
+    alertLevel,
+    sourceName: `${category} Observer`,
+    verifiedPublisher: featured || breaking ? 1 : 0,
+    trustScore: 68 + (featured ? 20 : 0) + (breaking ? 10 : 0),
+  };
+});
+
+articles.push(...generatedArticles);
+
 export function seedDatabase() {
   const insertCategory = db.prepare("INSERT OR IGNORE INTO categories (name, slug, description) VALUES (?, ?, ?)");
   categories.forEach(([name, description]) => insertCategory.run(name, slugify(name), description));
