@@ -16,6 +16,8 @@ export function SearchPage() {
   }, []);
 
   useEffect(() => {
+    setQuery(searchParams.get("q") || "");
+    setCategory(searchParams.get("category") || "");
     getArticles({ q: searchParams.get("q") || undefined, category: searchParams.get("category") || undefined }).then((result) => setArticles(result.articles));
   }, [searchParams]);
 

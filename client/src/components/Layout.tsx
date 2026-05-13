@@ -11,7 +11,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [alerts, setAlerts] = useState<any[]>([]);
   const [breaking, setBreaking] = useState<any[]>([]);
-  const [toastVisible, setToastVisible] = useState(false);
 
   useEffect(() => {
     getHome()
@@ -29,20 +28,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
-
-  useEffect(() => {
-    if (alerts.length === 0) {
-      setToastVisible(false);
-      return;
-    }
-    setToastVisible(true);
-    const [alert] = alerts;
-    if (typeof window !== "undefined" && "Notification" in window && Notification.permission === "granted" && alert) {
-      new Notification("NewsNest alert", { body: alert.title });
-    }
-    const timeout = window.setTimeout(() => setToastVisible(false), 7000);
-    return () => window.clearTimeout(timeout);
-  }, [alerts]);
 
   return (
     <div className="app-shell">
@@ -97,13 +82,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <Ticker articles={breaking as any} />
       </header>
-      {toastVisible && alerts.length > 0 ? (
-        <div className="alert-toast">
-          <span className="alert-toast-label">{alerts[0].alertLevel === "emergency" ? "Emergency" : "Alert"}</span>
-          <strong>{alerts[0].title}</strong>
-          <p>{alerts[0].excerpt}</p>
-        </div>
-      ) : null}
       <main className="site-main">{children}</main>
       <footer className="site-footer">
         <div className="footer-brand">
