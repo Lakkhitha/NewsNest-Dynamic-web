@@ -19,7 +19,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         setBreaking((payload.breaking ?? []).slice(0, 5));
         setAlerts((payload.alerts ?? []).slice(0, 3));
       })
-      .catch(() => setBreaking([]));
+      .catch((error) => {
+        console.error("Failed to fetch home data for Layout:", error);
+        setBreaking([]);
+        setAlerts([]);
+      });
   }, [location.pathname]);
 
   useEffect(() => {
